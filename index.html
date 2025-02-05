@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Mensagens Criptografadas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Título -->
+        <h1>Conversor de Mensagens Criptografadas</h1>
+
+        <!-- Seção de Criptografar -->
+        <div class="section encrypt-section">
+            <h2>Criptografar</h2>
+            <textarea id="normalText" placeholder="Digite o texto normal aqui..."></textarea>
+            <button id="encryptBtn">Criptografar</button>
+            <div class="result">
+                <h3>Resultado Criptografado:</h3>
+                <p id="encryptedResult"></p>
+            </div>
+        </div>
+
+        <!-- Seção de Descriptografar -->
+        <div class="section decrypt-section">
+            <h2>Descriptografar</h2>
+            <textarea id="encryptedText" placeholder="Digite o texto criptografado aqui..."></textarea>
+            <button id="decryptBtn">Descriptografar</button>
+            <div class="result">
+                <h3>Resultado Descriptografado:</h3>
+                <p id="decryptedResult"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player de Música -->
+    <div class="music-player">
+        <div class="music-cover">
+            <img src="music-cover.png" alt="Capa da Música">
+        </div>
+        <div class="music-controls">
+            <p class="music-title">Eu sento e me agarro PHONK</p>
+            <button id="stopMusicBtn">
+                <span class="play-icon">▶️</span>
+                <span class="pause-icon">⏸️</span>
+            </button>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>
