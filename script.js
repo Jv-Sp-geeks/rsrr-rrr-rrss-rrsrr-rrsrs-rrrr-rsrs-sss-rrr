@@ -20,33 +20,50 @@ const codeMap = {
 
 const reverseCodeMap = Object.fromEntries(Object.entries(codeMap).map(([k, v]) => [v, k]));
 
+// Função para criptografar
+function encrypt(text) {
+    return text
+        .toUpperCase()
+        .split('')
+        .map(char => {
+            if (char === ' ') {
+                return '  '; // Dois espaços para separar palavras
+            } else if (codeMap[char]) {
+                return codeMap[char]; // Criptografa letras mapeadas
+            } else {
+                return char; // Mantém números e outros caracteres
+            }
+        })
+        .join(' '); // Um espaço para separar letras
+}
+
+// Função para descriptografar
+function decrypt(encrypted) {
+    return encrypted
+        .split('  ') // Divide por dois espaços (separação de palavras)
+        .map(word =>
+            word
+                .split(' ') // Divide por um espaço (separação de letras)
+                .map(code => reverseCodeMap[code] || code) // Descriptografa ou mantém o código
+                .join('')
+        )
+        .join(' '); // Junta as palavras com um espaço
+}
+
 // Criptografar
 encryptBtn.addEventListener('click', () => {
-    const text = normalText.value.toUpperCase();
-    let encrypted = '';
-    for (let char of text) {
-        if (char === ' ') {
-            encrypted += ' ';
-        } else if (codeMap[char]) {
-            encrypted += codeMap[char] + ' ';
-        }
-    }
-    encryptedResult.textContent = encrypted.trim();
+    const text = normalText.value;
+    const encrypted = encrypt(text);
+    encryptedResult.textContent = encrypted;
+    encryptedText.value = encrypted;
 });
 
 // Descriptografar
 decryptBtn.addEventListener('click', () => {
-    const encrypted = encryptedText.value.trim();
-    const codes = encrypted.split(' ');
-    let decrypted = '';
-    for (let code of codes) {
-        if (code === '') {
-            decrypted += ' ';
-        } else if (reverseCodeMap[code]) {
-            decrypted += reverseCodeMap[code];
-        }
-    }
+    const encrypted = encryptedText.value;
+    const decrypted = decrypt(encrypted);
     decryptedResult.textContent = decrypted;
+    normalText.value = decrypted;
 });
 
 // Controle da música
