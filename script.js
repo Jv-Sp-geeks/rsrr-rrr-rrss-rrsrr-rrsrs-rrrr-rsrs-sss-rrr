@@ -4,6 +4,8 @@ const encryptBtn = document.getElementById('encryptBtn');
 const decryptBtn = document.getElementById('decryptBtn');
 const encryptedResult = document.getElementById('encryptedResult');
 const decryptedResult = document.getElementById('decryptedResult');
+const copyEncryptedBtn = document.getElementById('copyEncryptedBtn');
+const copyDecryptedBtn = document.getElementById('copyDecryptedBtn');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const stopMusicBtn = document.getElementById('stopMusicBtn');
 const playIcon = document.querySelector('.play-icon');
@@ -28,6 +30,8 @@ function encrypt(text) {
         .map(char => {
             if (char === ' ') {
                 return '  '; // Dois espaços para separar palavras
+            } else if (/[À-Úà-ú]/.test(char)) {
+                return char; // Mantém letras com acento
             } else if (codeMap[char]) {
                 return codeMap[char]; // Criptografa letras mapeadas
             } else {
@@ -64,6 +68,18 @@ decryptBtn.addEventListener('click', () => {
     const decrypted = decrypt(encrypted);
     decryptedResult.textContent = decrypted;
     normalText.value = decrypted;
+});
+
+// Copiar texto criptografado
+copyEncryptedBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(encryptedResult.textContent);
+    alert('Texto criptografado copiado!');
+});
+
+// Copiar texto descriptografado
+copyDecryptedBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(decryptedResult.textContent);
+    alert('Texto descriptografado copiado!');
 });
 
 // Controle da música
